@@ -32,11 +32,17 @@ func webhookHandler(c *fiber.Ctx) error {
 func main() {
 	// สร้าง app ด้วย Fiber
 	app := fiber.New()
-
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // ค่าเริ่มต้น (สำหรับการทดสอบใน local)
+	}
 	// กำหนด route สำหรับ Webhook endpoint
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, Render!")
+	})
 	app.Post("/webhook", webhookHandler)
 
 	// ตั้งค่า HTTP server
 	log.Println("Server started on :8080")
-	log.Fatal(app.Listen(":8080"))
+	log.Fatal(app.Listen(":"+port))
 }
