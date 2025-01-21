@@ -40,6 +40,9 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, Render!")
 	})
+	app.Get("/webhook", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, Render Webhook!")
+	})
 	app.Post("/webhook", webhookHandler)
 
 	// ตั้งค่า HTTP server
