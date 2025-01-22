@@ -10,6 +10,7 @@ import (
 func webhookHandler(c *fiber.Ctx) error {
 	// ตรวจสอบว่าเป็นการร้องขอ Validation หรือไม่
 	validationToken := c.Query("validationToken")
+	log.Println("validationToken:", validationToken)
 	if validationToken != "" {
 		// ถ้าเป็นการร้องขอ Validation ส่ง validationToken กลับไป
 		return c.SendString(validationToken)
